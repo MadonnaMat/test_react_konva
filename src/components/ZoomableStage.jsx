@@ -6,10 +6,10 @@ export default function ZoomableStage({
   scale,
   setScale,
   position,
+  stageRef,
   setPosition,
   ...props
 }) {
-  const stageRef = useRef();
 
   useEffect(() => {
     const stage = stageRef.current;
@@ -42,6 +42,7 @@ export default function ZoomableStage({
         direction > 0 ? oldScale * SCALE_BY : oldScale / SCALE_BY;
       const x = pointer.x;
       const y = pointer.y;
+
       const pointTo = {
         x: (x - stage.x()) / oldScale,
         y: (y - stage.y()) / oldScale,

@@ -4,6 +4,7 @@ import { Stage, Layer, Image } from "react-konva";
 import useImage from "use-image";
 import { useIntervalEffect } from "@react-hookz/web";
 import ZoomableStage, { SCALE_BY } from "./components/ZoomableStage";
+import ScrollableStage from "./components/ScrollableStage";
 
 const getScale = (widthRatio, heightRatio, scale) => {
   let newScale = Math.min(widthRatio, heightRatio);
@@ -82,24 +83,28 @@ const PhoneImage = ({ zoomTo, ...props }) => {
   );
 };
 
+
 function App() {
+  const [WIDTH, HEIGHT] = [1000, 1000];
+
   const [position, setPosition] = useState({
-    x: window.innerWidth / 2 - 300,
-    y: window.innerHeight / 2 - 200,
+    x: WIDTH / 2 - 300,
+    y: HEIGHT / 2 - 200,
   });
   const [scale, setScale] = useState(1);
 
   const zoomOut = useCallback(() => {
     setPosition({
-      x: window.innerWidth / 2,
-      y: window.innerHeight / 2,
+      x: WIDTH /2,
+      y: HEIGHT / 2,
     });
     setScale(scale / SCALE_BY);
   }, [scale]);
+
   const zoomIn = useCallback(() => {
     setPosition({
-      x: window.innerWidth / 2,
-      y: window.innerHeight / 2,
+      x: WIDTH /2,
+      y: HEIGHT / 2,
     });
     setScale(scale * SCALE_BY);
   }, [scale]);
@@ -124,15 +129,15 @@ function App() {
     <div className="App">
       <button onClick={zoomOut}>Zoom Out</button>
       <button onClick={zoomIn}>Zoom In</button>
-      <ZoomableStage
-        width={window.innerWidth}
-        height={window.innerHeight}
+      <ScrollableStage 
+        containerWidth={1000} 
+        containerHeight={1000} 
+        style={{width: '70vw', height: '50vh', position: 'absolute', left: '15%', top: '25%'}}
         position={position}
         setPosition={setPosition}
         scale={scale}
         setScale={setScale}
-        draggable
-      >
+        >
         <Layer>
           <BackgroundImage x={0} y={0} />
           <PhoneImage x={150} y={-30} zoomTo={zoomTo} />
@@ -142,9 +147,10 @@ function App() {
           <PhoneImage x={150} y={200} zoomTo={zoomTo} />
           <PhoneImage x={300} y={200} zoomTo={zoomTo} />
         </Layer>
-      </ZoomableStage>
+
+      </ScrollableStage>
     </div>
-  );
+  )
 }
 
 export default App;
