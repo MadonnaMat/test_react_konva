@@ -138,7 +138,6 @@ function App() {
         scale={scale}
         setScale={setScale}
         >
-        <Layer>
           <BackgroundImage x={0} y={0} />
           <PhoneImage x={150} y={-30} zoomTo={zoomTo} />
           <PhoneImage x={300} y={-30} zoomTo={zoomTo} />
@@ -146,7 +145,6 @@ function App() {
           <PhoneImage x={300} y={90} zoomTo={zoomTo} />
           <PhoneImage x={150} y={200} zoomTo={zoomTo} />
           <PhoneImage x={300} y={200} zoomTo={zoomTo} />
-        </Layer>
 
       </ScrollableStage>
     </div>
